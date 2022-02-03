@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/test-softorium/static/css/main.2a41c5fd.css",
+    "main.js": "/test-softorium/static/js/main.199f0e63.js",
+    "index.html": "/test-softorium/index.html",
+    "main.2a41c5fd.css.map": "/test-softorium/static/css/main.2a41c5fd.css.map",
+    "main.199f0e63.js.map": "/test-softorium/static/js/main.199f0e63.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a41c5fd.css",
+    "static/js/main.199f0e63.js"
+  ]
+}
