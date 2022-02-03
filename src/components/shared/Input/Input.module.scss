@@ -1,0 +1,15 @@
+.input {
+  width: 100%;
+  padding: 10px;
+  height: 40px;
+  background: #303338;
+  border: 1px solid #212327;
+  border-radius: 5px;
+  color: #dcddde;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: #00aff4;
+  }
+}

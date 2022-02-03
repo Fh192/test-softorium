@@ -1,0 +1,30 @@
+.alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.hide {
+  top: -50px;
+  opacity: 0;
+}
+
+.error {
+  background: #ed4245;
+}
+
+.success {
+  background: #3ba55d;
+}
+
+.warning {
+  background: #faa81a;
+}

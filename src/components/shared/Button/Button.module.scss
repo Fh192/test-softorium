@@ -1,0 +1,31 @@
+.button {
+  height: 40px;
+  background: #5865f2;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.success {
+  background: #3ba55d;
+  &:hover {
+    background: rgba(59, 165, 93, 0.6);
+  }
+}
+.danger {
+  background: #e04042;
+  &:hover {
+    background: rgba(224, 64, 67, 0.6);
+  }
+}
+.primary {
+  background: #5865f2;
+  &:hover {
+    background: rgba(88, 101, 242, 0.6);
+  }
+}

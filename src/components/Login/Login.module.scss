@@ -1,0 +1,73 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 450px;
+  width: 100%;
+  padding: 30px;
+  margin: 10px;
+  background: #36393f;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(54, 57, 63, 20%);
+  transition: padding 0.5s ease;
+
+  @media screen and (max-width: 450px) {
+    padding: 30px 20px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  label {
+    color: #b9bbbe;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    height: 40px;
+    background: #303338;
+    border: 1px solid #212327;
+    border-radius: 5px;
+    color: #dcddde;
+    font-size: 15px;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: #00aff4;
+    }
+  }
+}
+
+.needAccount {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #72767d;
+
+  a {
+    color: #00aff4;
+  }
+}

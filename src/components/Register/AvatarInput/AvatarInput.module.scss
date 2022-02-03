@@ -1,0 +1,11 @@
+.avatarInput {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inner {
+  input[type='file'] {
+    // display: none;
+  }
+}

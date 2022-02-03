@@ -1,0 +1,20 @@
+.label {
+  color: #b9bbbe;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.birthday {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
