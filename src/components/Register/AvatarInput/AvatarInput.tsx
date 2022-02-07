@@ -1,6 +1,6 @@
 import React from 'react';
 import { Label } from '../../shared';
-import s from './AvatarInput.module.scss';
+import styles from './AvatarInput.module.scss';
 
 interface Props {
   setAvatar: (avatar: string) => void;
@@ -24,9 +24,9 @@ export const AvatarInput: React.FC<Props> = ({ setAvatar }) => {
   };
 
   return (
-    <div className={s.avatarInput}>
-      <Label title='avatar' />
-      <label className={s.inner}>
+    <div className={styles.avatarInput}>
+      <Label title='аватар' />
+      <label className={styles.inner}>
         <input
           type='file'
           name='avatar'

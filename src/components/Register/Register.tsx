@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from '../../hooks';
 import { setAlert } from '../../store/reducers/alertReducer';
 import { signup } from '../../store/reducers/authReducer';
-import { ISignupData } from '../../types/auth';
+import { SignupData } from '../../types/auth';
+import { transformPhoneNumber } from '../../utils';
 import { Button } from '../shared';
 import { FormField } from '../shared/FormField/FormField';
 import { AvatarInput } from './AvatarInput/AvatarInput';
 import { Birthday } from './Birthday/Birthday';
-import s from './Register.module.scss';
+import styles from './Register.module.scss';
 
 export const Register: React.FC = () => {
   const dispatch = useDispatch();
-  const [formValues, setFormValues] = useState<ISignupData>({
+
+  const [formValues, setFormValues] = useState<SignupData>({
     email: '',
     name: '',
     password: '',
@@ -22,10 +24,14 @@ export const Register: React.FC = () => {
     birthday: '',
   });
 
-  const setFormValuesHelper = (fieldName: keyof ISignupData) => {
+  const handleInputChange = (name: keyof SignupData) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      setFormValues(values => ({ ...values, [fieldName]: value }));
+      const value =
+        name === 'phone'
+          ? transformPhoneNumber(e.target.value)
+          : e.target.value;
+
+      setFormValues(values => ({ ...values, [name]: value }));
     };
   };
 
@@ -43,53 +49,55 @@ export const Register: React.FC = () => {
           setAlert({ message: 'Аккаунт успешно создан!', variant: 'success' })
         );
       })
-      .catch(e => {
-        dispatch(setAlert({ message: e.message, variant: 'error' }));
+      .catch(error => {
+        if (typeof error === 'string') {
+          dispatch(setAlert({ message: error, variant: 'error' }));
+        } else {
+          dispatch(setAlert({ message: error.message, variant: 'error' }));
+        }
       });
   };
 
   return (
-    <div className={s.register}>
-      <h3 className={s.title}>Create an account</h3>
-      <form className={s.form} onSubmit={submitHandler}>
-        <fieldset className={s.fieldset}>
+    <div className={styles.register}>
+      <form className={styles.form} onSubmit={submitHandler}>
+        <fieldset className={styles.fieldset}>
           <FormField
-            label='Email'
+            label='Почта'
             type='email'
-            name='email'
             id='email'
             value={formValues.email}
-            onChange={setFormValuesHelper('email')}
+            onChange={handleInputChange('email')}
             required
           />
 
           <FormField
-            label='Name'
+            label='Имя'
             type='text'
-            name='name'
             id='name'
             value={formValues.name}
-            onChange={setFormValuesHelper('name')}
+            onChange={handleInputChange('name')}
             required
           />
 
           <FormField
-            label='Phone number'
-            type='text'
-            name='phone'
+            label='Номер телефона'
+            type='tel'
             id='phone'
+            maxLength={18}
+            minLength={18}
             value={formValues.phone}
-            onChange={setFormValuesHelper('phone')}
+            onChange={handleInputChange('phone')}
+            placeholder='+7'
             required
           />
 
           <FormField
-            label='Password'
+            label='Пароль'
             type='password'
-            name='password'
             id='password'
             value={formValues.password}
-            onChange={setFormValuesHelper('password')}
+            onChange={handleInputChange('password')}
             required
           />
 
@@ -97,10 +105,10 @@ export const Register: React.FC = () => {
           <AvatarInput setAvatar={setAvatar} />
         </fieldset>
 
-        <Button type='submit'>Register</Button>
+        <Button type='submit'>Регистрация</Button>
       </form>
-      <div className={s.haveAccount}>
-        <Link to={'/login'}>Already have an account?</Link>
+      <div className={styles.haveAccount}>
+        <Link to={'/login'}>Уже есть аккаунт?</Link>
       </div>
     </div>
   );

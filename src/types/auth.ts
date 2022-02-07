@@ -1,14 +1,14 @@
-export interface ISigninData {
+export interface SigninData {
   username: string;
   password: string;
 }
 
-export interface ISigninResponse {
+export interface SigninResponse {
   access_token: string;
   token_type: string;
 }
 
-export interface ISignupData {
+export interface SignupData {
   phone: string;
   password: string;
   name: string;

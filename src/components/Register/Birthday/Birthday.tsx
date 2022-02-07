@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { ISignupData } from '../../../types/auth';
+import { SignupData } from '../../../types/auth';
 import { Input } from '../../shared';
-import s from './Birthday.module.scss';
+import styles from './Birthday.module.scss';
 
 interface Props {
-  setFormValues: React.Dispatch<React.SetStateAction<ISignupData>>;
+  setFormValues: React.Dispatch<React.SetStateAction<SignupData>>;
 }
 
 export const Birthday: React.FC<Props> = ({ setFormValues }) => {
@@ -27,43 +27,40 @@ export const Birthday: React.FC<Props> = ({ setFormValues }) => {
     }));
   }, [birthday, setFormValues]);
 
+
+ 
   return (
-    <div className={s.birthday} title='Date of birth'>
-      <label className={s.label} htmlFor=''>
-        birthday
-      </label>
-      <div className={s.inner}>
+    <div className={styles.birthday}>
+      <label className={styles.label}>Дата рождения</label>
+      <div className={styles.inner}>
         <Input
           type='number'
-          name='day'
           id='day'
           max={31}
           min={1}
           value={birthday.day}
           onChange={setBirthdayHelper('day')}
-          placeholder='DD'
+          placeholder='ДД'
           required
         />
         <Input
           type='number'
-          name='month'
           id='month'
           max={12}
           min={1}
           value={birthday.month}
           onChange={setBirthdayHelper('month')}
-          placeholder='MM'
+          placeholder='ММ'
           required
         />
         <Input
           type='number'
-          name='year'
           id='year'
           max={new Date().getFullYear() - 1}
           min={1920}
           value={birthday.year}
           onChange={setBirthdayHelper('year')}
-          placeholder='YYYY'
+          placeholder='ГГГГ'
           required
         />
       </div>

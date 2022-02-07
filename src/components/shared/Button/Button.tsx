@@ -1,19 +1,19 @@
 import classnames from 'classnames/bind';
 import React from 'react';
-import s from './Button.module.scss';
+import styles from './Button.module.scss';
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: 'success' | 'danger' | 'primary';
+  variant?: 'success' | 'danger' | 'primary';
 }
 
 export const Button: React.FC<Props> = ({
   children,
-  color = 'primary',
+  variant = 'primary',
   ...props
 }) => {
-  const cn = classnames.bind(s);
-  
+  const cn = classnames.bind(styles);
+
   return (
-    <button className={cn('button', color)} {...props}>
+    <button className={cn('button', variant)} {...props}>
       {children}
     </button>
   );

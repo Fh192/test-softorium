@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Profile } from '../../components/Profile/Profile';
 import { useDispatch, useSelector } from '../../hooks';
 import { setAlert } from '../../store/reducers/alertReducer';
 import { getUserProfile } from '../../store/reducers/profileReducer';
@@ -12,25 +13,18 @@ export const ProfilePage: React.FC = () => {
   const { isAuth } = useSelector(s => s.auth);
 
   useEffect(() => {
-    dispatch(getUserProfile())
-      .unwrap()
-      .then(({ id }) => {
-        navigate(id);
-      })
-      .catch(errMessage => {
+    if (isAuth) {
+      dispatch(getUserProfile()).catch(errMessage => {
         dispatch(setAlert({ message: errMessage, variant: 'error' }));
       });
-  }, [dispatch, navigate]);
-
-  useEffect(() => {
-    if (!isAuth) {
+    } else {
       navigate('/login');
     }
-  }, [isAuth, navigate]);
+  }, [dispatch, navigate, isAuth]);
 
   return (
     <div className={s.profilePage}>
-      <Outlet />
+      <Profile />
     </div>
   );
 };

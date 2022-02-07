@@ -1,1 +1,1 @@
-export type IErrorResponse = { detail: string };
+export type ErrorResponse = { detail: string };

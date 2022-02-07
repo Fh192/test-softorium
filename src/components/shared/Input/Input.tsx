@@ -1,6 +1,7 @@
 import React from 'react';
-import s from './Input.module.scss';
+import styles from './Input.module.scss';
 
 export const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = ({
+  id,
   ...props
-}) => <input className={s.input} {...props} />;
+}) => <input id={id} name={id} className={styles.input} {...props} />;

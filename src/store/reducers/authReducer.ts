@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { auth } from '../../api/auth';
-import { ISigninData, ISignupData } from '../../types/auth';
-import { IErrorResponse } from '../../types/common';
+import { SigninData, SignupData } from '../../types/auth';
+import { ErrorResponse } from '../../types/common';
 import { setProfile } from './profileReducer';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 
 export const signin = createAsyncThunk<
   string,
-  ISigninData,
+  SigninData,
   { rejectValue: string }
 >('auth/signin', async (signinData, { rejectWithValue }) => {
   try {
@@ -23,25 +23,41 @@ export const signin = createAsyncThunk<
 
     return access_token;
   } catch (err) {
-    const error = err as AxiosError<IErrorResponse>;
-    
+    const error = err as AxiosError<ErrorResponse>;
+
     if (!error.response) {
       throw err;
     }
 
-    const errorMessage = error.response.data.detail as string;
+    const errorMessage = error.response.data.detail;
     return rejectWithValue(errorMessage);
   }
 });
 
-export const signup = createAsyncThunk<void, ISignupData>(
-  'auth/signup',
-  async (signupData, { dispatch }) => {
+export const signup = createAsyncThunk<
+  void,
+  SignupData,
+  { rejectValue: string }
+>('auth/signup', async (signupData, { dispatch, rejectWithValue }) => {
+  try {
     const data = await auth.signup(signupData);
 
     dispatch(setProfile(data));
+  } catch (err) {
+    interface SignupError {
+      detail: Array<{ msg: string }>;
+    }
+    const error = err as AxiosError<SignupError>;
+
+    if (!error.response) {
+      throw err;
+    }
+    
+    const errorMessage = error.response.data.detail[0].msg;
+ 
+    return rejectWithValue(errorMessage);
   }
-);
+});
 
 export const authReducer = createSlice({
   name: 'auth',

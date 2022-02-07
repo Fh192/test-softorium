@@ -1,6 +1,6 @@
-export type IAlertValiant = 'error' | 'success' | 'warning';
+export type AlertValiant = 'error' | 'success' | 'warning';
 
-export interface IAlert {
+export interface Alert {
   message: string;
-  variant: IAlertValiant;
+  variant: AlertValiant;
 }

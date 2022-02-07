@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IAlert, IAlertValiant } from '../../types/alert';
+import { Alert, AlertValiant } from '../../types/alert';
 
-const initialState: IAlert = {
+const initialState: Alert = {
   message: '',
   variant: 'success',
 };
@@ -12,7 +12,7 @@ export const alertReducer = createSlice({
   reducers: {
     setAlert: (
       state,
-      action: PayloadAction<{ message: string; variant: IAlertValiant }>
+      action: PayloadAction<{ message: string; variant: AlertValiant }>
     ) => {
       const { message, variant } = action.payload;
 

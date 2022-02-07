@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from '../../hooks';
 import { setAlert } from '../../store/reducers/alertReducer';
 import { signin } from '../../store/reducers/authReducer';
-import { ISigninData } from '../../types/auth';
+import { SigninData } from '../../types/auth';
 import { Button } from '../shared';
 import { FormField } from '../shared/FormField/FormField';
-import s from './Login.module.scss';
+import styles from './Login.module.scss';
 
 export const Login: React.FC = () => {
   const dispatch = useDispatch();
 
-  const [formValues, setFormValues] = useState<ISigninData>({
+  const [formValues, setFormValues] = useState<SigninData>({
     password: '',
     username: '',
   });
 
-  const setFormValuesHelper = (fieldName: keyof ISigninData) => {
+  const handleInputChange = (name: keyof SigninData) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      setFormValues(values => ({ ...values, [fieldName]: value }));
+      setFormValues(values => ({ ...values, [name]: value }));
     };
   };
 
@@ -36,39 +36,41 @@ export const Login: React.FC = () => {
           })
         );
       })
-      .catch(errMessage => {
-        dispatch(setAlert({ message: errMessage, variant: 'error' }));
+      .catch(error => {
+        if (typeof error === 'string') {
+          dispatch(setAlert({ message: error, variant: 'error' }));
+        } else {
+          dispatch(setAlert({ message: error.message, variant: 'error' }));
+        }
       });
   };
 
   return (
-    <div className={s.login}>
-      <form className={s.form} onSubmit={submitHandler}>
-        <fieldset className={s.fieldset}>
+    <div className={styles.login}>
+      <form className={styles.form} onSubmit={submitHandler}>
+        <fieldset className={styles.fieldset}>
           <FormField
-            label='Email or phone number'
+            label='Почта или номер телефона'
             type='text'
-            name='username'
             id='username'
             value={formValues.username}
-            onChange={setFormValuesHelper('username')}
+            onChange={handleInputChange('username')}
           />
 
           <FormField
-            label='Password'
+            label='Пароль'
             type='password'
-            name='password'
             id='password'
             value={formValues.password}
-            onChange={setFormValuesHelper('password')}
+            onChange={handleInputChange('password')}
           />
         </fieldset>
 
-        <Button type='submit'>Login</Button>
+        <Button type='submit'>Вход</Button>
       </form>
-      <div className={s.needAccount}>
-        <span>Need an account?</span>
-        <Link to={'/register'}>Register</Link>
+      <div className={styles.needAccount}>
+        <span>Нужен аккаунт?</span>
+        <Link to={'/register'}>Регистрация</Link>
       </div>
     </div>
   );

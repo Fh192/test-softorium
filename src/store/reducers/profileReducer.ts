@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { RootState } from '..';
 import { profile } from '../../api/profile';
-import { IErrorResponse } from '../../types/common';
-import { IProfile } from '../../types/profile';
+import { ErrorResponse } from '../../types/common';
+import { Profile } from '../../types/profile';
 
-const initialState: IProfile = {
+const initialState: Profile = {
   id: '',
   phone: '',
   name: '',
@@ -18,7 +18,7 @@ const initialState: IProfile = {
 };
 
 export const getUserProfile = createAsyncThunk<
-  IProfile,
+  Profile,
   void,
   { state: RootState; rejectValue: string }
 >('profile/getUserProfile', async (_, { rejectWithValue, getState }) => {
@@ -27,7 +27,7 @@ export const getUserProfile = createAsyncThunk<
 
     return await profile.getProfile(access_token);
   } catch (err) {
-    const error = err as AxiosError<IErrorResponse>;
+    const error = err as AxiosError<ErrorResponse>;
 
     if (!error.response) {
       throw err;
@@ -42,7 +42,7 @@ export const profileReducer = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    setProfile: (state, action: PayloadAction<IProfile>) => {
+    setProfile: (state, action: PayloadAction<Profile>) => {
       state = action.payload;
     },
   },

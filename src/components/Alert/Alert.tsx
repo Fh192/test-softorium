@@ -1,10 +1,10 @@
 import classnames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from '../../hooks';
-import s from './Alert.module.scss';
+import styles from './Alert.module.scss';
 
 export const Alert: React.FC = () => {
-  const cn = classnames.bind(s);
+  const cn = classnames.bind(styles);
 
   const { message, variant } = useSelector(s => s.alert);
   const [hide, setHide] = useState(!message);
