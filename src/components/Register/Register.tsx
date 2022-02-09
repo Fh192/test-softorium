@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from '../../hooks';
 import { setAlert } from '../../store/reducers/alertReducer';
 import { signup } from '../../store/reducers/authReducer';
@@ -13,6 +13,7 @@ import styles from './Register.module.scss';
 
 export const Register: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState<SignupData>({
     email: '',
@@ -48,6 +49,7 @@ export const Register: React.FC = () => {
         dispatch(
           setAlert({ message: 'Аккаунт успешно создан!', variant: 'success' })
         );
+        navigate('/login');
       })
       .catch(error => {
         if (typeof error === 'string') {

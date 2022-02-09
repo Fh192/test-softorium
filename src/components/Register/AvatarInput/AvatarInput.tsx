@@ -15,7 +15,7 @@ export const AvatarInput: React.FC<Props> = ({ setAvatar }) => {
 
       fr.onload = () => {
         if (typeof fr.result === 'string') {
-          setAvatar(fr.result);
+          setAvatar(fr.result.slice(22));
         }
       };
 
