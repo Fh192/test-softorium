@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/test-softorium/static/css/main.b72bff1c.css",
-    "main.js": "/test-softorium/static/js/main.3078a1ae.js",
+    "main.js": "/test-softorium/static/js/main.abd35745.js",
     "index.html": "/test-softorium/index.html",
     "main.b72bff1c.css.map": "/test-softorium/static/css/main.b72bff1c.css.map",
-    "main.3078a1ae.js.map": "/test-softorium/static/js/main.3078a1ae.js.map"
+    "main.abd35745.js.map": "/test-softorium/static/js/main.abd35745.js.map"
   },
   "entrypoints": [
     "static/css/main.b72bff1c.css",
-    "static/js/main.3078a1ae.js"
+    "static/js/main.abd35745.js"
   ]
 }
